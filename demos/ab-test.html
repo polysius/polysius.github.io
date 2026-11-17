@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>A/B Test Power Calculator | Data and ML Portfolio</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <a class="brand" href="../index.html">Data and ML Portfolio</a>
+      <nav class="site-nav" aria-label="Main">
+        <a href="../index.html#demos">Demos</a>
+        <a href="../index.html#projects">Projects</a>
+        <a href="https://github.com/polysius">GitHub</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="project-head">
+      <h1>A/B test power calculator</h1>
+      <p class="tagline">From the <a href="../project.html?slug=two-stage-recsys">two-stage recommender</a>. The experiment compared the ranker against recent popularity on hit rate at 10. The defaults below are that experiment.</p>
+    </section>
+
+    <div class="panel">
+      <h2 style="margin-top:0">1. Planning: how many users do you need?</h2>
+      <div class="controls">
+        <label>Control hit rate <span class="value-readout">(validation window: 0.0757)</span>
+          <input type="number" id="plan-baseline" value="0.0757" min="0.001" max="0.9" step="0.001"></label>
+        <label>Relative lift to detect (%)
+          <input type="number" id="plan-lift" value="20" min="1" max="200" step="1"></label>
+        <label>Users per arm available
+          <input type="number" id="plan-users" value="4447" min="50" max="1000000" step="1"></label>
+        <label>Significance level (alpha)
+          <select id="plan-alpha"><option>0.05</option><option>0.01</option><option>0.10</option></select></label>
+        <label>Target power
+          <select id="plan-power"><option>0.8</option><option>0.9</option><option>0.7</option></select></label>
+      </div>
+      <dl id="plan-output"></dl>
+      <p>Sample sizes use the standard two-proportion formula. The project's own table uses a slightly different formula (Cohen's h) and differs by under 1%.</p>
+    </div>
+
+    <div class="panel">
+      <h2 style="margin-top:0">2. Analysis: is the observed difference real?</h2>
+      <p>Defaults are the reported hit rates (0.0814 and 0.0933), turned back into user counts by rounding. The project reports p = 0.047 and a lift interval of 0.2% to 31%.</p>
+      <div class="controls">
+        <label>Control users <input type="number" id="control-users" value="4447" min="1"></label>
+        <label>Control hits <input type="number" id="control-hits" value="362" min="0"></label>
+        <label>Treatment users <input type="number" id="treatment-users" value="4448" min="1"></label>
+        <label>Treatment hits <input type="number" id="treatment-hits" value="415" min="0"></label>
+      </div>
+      <dl id="analysis-output"></dl>
+    </div>
+
+    <p class="note-box">The experiment is simulated on held-out purchases, not run on live traffic. It only covers warm users. The write-up calls the evidence weak, and the two panels show why: the observed lift is smaller than the 22% the test could reliably detect.</p>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap"><a href="../index.html">Back to all projects</a></div>
+  </footer>
+
+  <script src="../js/ab-stats.js"></script>
+  <script src="../js/ab-demo.js"></script>
+</body>
+</html>

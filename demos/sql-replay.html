@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Recorded Text-to-SQL Runs | Data and ML Portfolio</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <a class="brand" href="../index.html">Data and ML Portfolio</a>
+      <nav class="site-nav" aria-label="Main">
+        <a href="../index.html#demos">Demos</a>
+        <a href="../index.html#projects">Projects</a>
+        <a href="https://github.com/polysius">GitHub</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="project-head">
+      <h1>Recorded text-to-SQL runs</h1>
+      <p class="tagline">From the <a href="../project.html?slug=nl-analytics-agent">text-to-SQL agent</a>. Every question in the benchmark, the SQL the agent wrote, and the SQL it should have written.</p>
+    </section>
+
+    <p class="note-box"><strong>This is a recording, not a live model.</strong> The agent needs a database and an LLM, which a static page cannot host for free. These are the saved results of one benchmark run per database. A question counts as correct when the agent's query returns the same rows as the reference query, so a correct answer can use different SQL.</p>
+
+    <div class="panel">
+      <div class="controls">
+        <label>Run <select id="run"></select></label>
+        <label>Difficulty
+          <select id="difficulty"><option value="all">All</option><option>easy</option><option>medium</option><option>hard</option></select></label>
+        <label>Result
+          <select id="outcome"><option value="all">All</option><option value="correct">Correct</option><option value="incorrect">Incorrect</option></select></label>
+      </div>
+      <p id="run-summary" style="margin-bottom:0"></p>
+    </div>
+
+    <div id="questions"></div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap"><a href="../index.html">Back to all projects</a></div>
+  </footer>
+
+  <script src="../js/sql-replay.js"></script>
+</body>
+</html>

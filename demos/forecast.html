@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Baseline Forecasting Playground | Data and ML Portfolio</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <a class="brand" href="../index.html">Data and ML Portfolio</a>
+      <nav class="site-nav" aria-label="Main">
+        <a href="../index.html#demos">Demos</a>
+        <a href="../index.html#projects">Projects</a>
+        <a href="https://github.com/polysius">GitHub</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="project-head">
+      <h1>Baseline forecasting playground</h1>
+      <p class="tagline">From the <a href="../project.html?slug=lstm-load-forecasting">load forecasting project</a>. Two baselines forecast the next 24 hours from the last 168. Which one wins depends on how far ahead you look.</p>
+    </section>
+
+    <p class="note-box"><strong>Synthetic data.</strong> The load curve is generated in your browser from a daily cycle and correlated noise. It is not the project's real data and it does not run the project's LSTM. It only shows why the two baselines behave as they do. Real results are on the <a href="../project.html?slug=lstm-load-forecasting">project page</a>.</p>
+
+    <div class="panel">
+      <div class="controls">
+        <label>Daily swing <span class="value-readout" id="swing-readout"></span>
+          <input type="range" id="swing" min="0" max="300" step="10" value="150"></label>
+        <label>Noise <span class="value-readout" id="noise-readout"></span>
+          <input type="range" id="noise" min="0" max="100" step="5" value="30"></label>
+        <label>Level shift in the forecast window <span class="value-readout" id="shift-readout"></span>
+          <input type="range" id="shift" min="-25" max="25" step="1" value="0"></label>
+        <label>Random seed
+          <input type="number" id="seed" value="7" min="1" max="99999"></label>
+      </div>
+      <p><button class="button" id="redraw" type="button">Draw a new curve</button></p>
+    </div>
+
+    <div class="panel">
+      <canvas id="chart" width="900" height="360" role="img" aria-label="Line chart of the last 168 hours of load, the actual next 24 hours, and two baseline forecasts"></canvas>
+      <ul class="legend">
+        <li><span class="swatch" style="background: var(--muted)"></span>History (168 h)</li>
+        <li><span class="swatch" style="background: var(--text)"></span>Actual next 24 h</li>
+        <li><span class="swatch" style="background: var(--series-b)"></span>Naive: repeat the last value</li>
+        <li><span class="swatch" style="background: var(--series-a)"></span>Seasonal naive: same hour yesterday</li>
+      </ul>
+    </div>
+
+    <div class="panel">
+      <h2 style="margin-top:0">Average error over 300 random curves</h2>
+      <p>Mean absolute error at three horizons, using the settings above. Lower is better. The best baseline at each horizon is in bold.</p>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>Horizon</th><th class="num">Naive</th><th class="num">Seasonal naive</th></tr></thead>
+          <tbody id="results"></tbody>
+        </table>
+      </div>
+      <p style="margin-top:1rem">Repeating the last value wins very close in and falls behind as the horizon grows. In the real study persistence also led at 1 and 6 hours (MASE 0.473 and 0.644), seasonal naive scored 0.743 at 24 hours, and the LSTM was worse than seasonal naive at every horizon. Push the level shift away from zero to see both baselines fail when the regime changes.</p>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap"><a href="../index.html">Back to all projects</a></div>
+  </footer>
+
+  <script src="../js/forecast-demo.js"></script>
+</body>
+</html>
