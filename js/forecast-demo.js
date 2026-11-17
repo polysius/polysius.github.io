@@ -3,10 +3,9 @@
 const HISTORY_HOURS = 168;
 const HORIZON_HOURS = 24;
 const BASE_LOAD = 1000;
-const WEEKEND_DIP = 80;
 const NOISE_PERSISTENCE = 0.9; // how strongly noise carries from one hour to the next
 const AVERAGING_DRAWS = 300;
-// Not 24: here the last observed hour is also "same hour yesterday" for hour 24, so the two baselines tie.
+// Not 24: the last observed hour is also "same hour yesterday" for hour 24, so the two baselines tie.
 const REPORTED_HORIZONS = [1, 6, 12];
 
 const controls = {
@@ -47,10 +46,9 @@ function generateSeries(random, { swing, noise, shiftPercent }) {
   let noiseState = 0;
   for (let hour = 0; hour < HISTORY_HOURS + HORIZON_HOURS; hour++) {
     const dailyCycle = swing * Math.sin((2 * Math.PI * (hour - 6)) / 24);
-    const isWeekend = Math.floor(hour / 24) % 7 >= 5;
     noiseState = NOISE_PERSISTENCE * noiseState + noise * gaussian(random) * Math.sqrt(1 - NOISE_PERSISTENCE ** 2);
     const level = hour >= HISTORY_HOURS ? 1 + shiftPercent / 100 : 1;
-    values.push((BASE_LOAD + dailyCycle - (isWeekend ? WEEKEND_DIP : 0) + noiseState) * level);
+    values.push((BASE_LOAD + dailyCycle + noiseState) * level);
   }
   return values;
 }

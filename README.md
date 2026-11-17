@@ -4,7 +4,7 @@ Plain HTML, CSS and JavaScript. No build step, no dependencies.
 
 - `index.html` lists the projects and demos. `project.html?slug=<name>` renders a case study.
 - `js/projects.js` holds every project's text and numbers. Each number is copied from that project's README or RESULTS.md.
-- `demos/` holds three in-browser demos. The SQL replay reads `data/sql-replay.json`, built by `tools/build_replay_data.py`.
+- `demos/` holds three in-browser demos. The SQL replay reads `data/sql-replay.json`, built by `tools/build_replay_data.py <path to nl-analytics-agent/reports>`.
 
 Preview locally: `python -m http.server 8765` in this folder, then open http://localhost:8765/.
 
