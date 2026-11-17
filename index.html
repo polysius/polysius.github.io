@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Data and ML Portfolio</title>
+  <meta name="description" content="Ten data and machine learning projects with measured results, written up with their limits. Three have demos that run in the browser.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <a class="brand" href="index.html">Data and ML Portfolio</a>
+      <nav class="site-nav" aria-label="Main">
+        <a href="#demos">Demos</a>
+        <a href="#projects">Projects</a>
+        <a href="https://github.com/polysius">GitHub</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <h1>Data and machine learning projects, with the numbers and the caveats</h1>
+      <p>Ten projects across forecasting, recommenders, LLM agents, data engineering and edge AI. Each page reports what was measured and what was not. Where a result is weak or a project is unfinished, it says so.</p>
+    </section>
+
+    <section id="demos" aria-labelledby="demos-heading">
+      <h2 id="demos-heading">Try it in your browser</h2>
+      <p>These run entirely in the page. Nothing is sent to a server.</p>
+      <div class="card-grid">
+        <article class="card demo-card">
+          <h3><a href="demos/forecast.html">Baseline forecasting playground</a></h3>
+          <p>Shape a load curve and watch naive and seasonal-naive forecasts compete. It shows why the LSTM study's baselines were hard to beat.</p>
+        </article>
+        <article class="card demo-card">
+          <h3><a href="demos/ab-test.html">A/B test power calculator</a></h3>
+          <p>Change the baseline rate, lift and sample size. Starts from the recommender experiment, so you can see why its result was weak.</p>
+        </article>
+        <article class="card demo-card">
+          <h3><a href="demos/sql-replay.html">Recorded text-to-SQL runs</a></h3>
+          <p>Browse 74 benchmark questions with the SQL the agent wrote, the correct SQL, and whether it matched. A recording, not a live model.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="projects" aria-labelledby="projects-heading">
+      <h2 id="projects-heading">Projects</h2>
+      <div class="filters" id="filters" role="group" aria-label="Filter projects by status"></div>
+      <div class="card-grid" id="project-grid"></div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">Source for every project is on <a href="https://github.com/polysius">GitHub</a>. This site is plain HTML, CSS and JavaScript with no build step.</div>
+  </footer>
+
+  <script src="js/projects.js"></script>
+  <script src="js/home.js"></script>
+</body>
+</html>
